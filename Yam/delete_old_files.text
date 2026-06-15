@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <directory_path> <days>"
+    exit 1
+fi
+
+DIR_PATH=$1
+DAYS=$2
+
+if [ ! -d "$DIR_PATH" ]; then
+    echo "Error: Directory '$DIR_PATH' not found."
+    exit 1
+fi
+
+echo "Deleting files older than $DAYS days in $DIR_PATH..."
+find "$DIR_PATH" -type f -mtime +"$DAYS" -exec rm -f {} \;
+echo "Done."

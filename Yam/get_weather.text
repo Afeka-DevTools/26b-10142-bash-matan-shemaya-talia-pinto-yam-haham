@@ -1,0 +1,22 @@
+#!/bin/bash
+# סקריפט זה שולף ומציג את מזג האוויר העדכני עבור עיר מסוימת שמועברת כפרמטר.
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <city_name>"
+    exit 1
+fi
+
+CITY=$1
+
+if ! command -v curl &> /dev/null; then
+    echo "Error: 'curl' is not installed."
+    echo "Attempting to install curl..."
+    sudo apt-get update && sudo apt-get install -y curl
+    if [ $? -ne 0 ]; then
+        echo "Installation failed. Please install curl manually."
+        exit 1
+    fi
+fi
+
+echo "Fetching weather for $CITY..."
+curl -s "wttr.in/${CITY}?0"

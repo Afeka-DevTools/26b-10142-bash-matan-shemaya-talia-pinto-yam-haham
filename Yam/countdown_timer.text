@@ -1,0 +1,19 @@
+#!/bin/bash
+# סקריפט זה מהווה טיימר ספירה לאחור המקבל קלט בפורמט HH:MM:SS ומציג את הזמן הנותר על המסך.
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 HH:MM:SS"
+    exit 1
+fi
+
+IFS=: read -r h m s <<< "$1"
+TOTAL_SECONDS=$((10#$h * 3600 + 10#$m * 60 + 10#$s))
+
+while [ $TOTAL_SECONDS -gt 0 ]; do
+    printf "\rTime remaining: %02d:%02d:%02d" $((TOTAL_SECONDS/3600)) $(( (TOTAL_SECONDS/60)%60 )) $((TOTAL_SECONDS%60))
+    sleep 1
+    : $((TOTAL_SECONDS--))
+done
+
+printf "\rTime remaining: 00:00:00\n"
+echo "Time's up!"

@@ -1,0 +1,12 @@
+#!/bin/bash
+# סקריפט זה מציג את שטח הדיסק שנמצא בשימוש על ידי התיקיות בנתיב המבוקש, ממוין לפי גודל.
+
+DIR_PATH=${1:-.}
+
+if [ ! -d "$DIR_PATH" ]; then
+    echo "Error: Directory '$DIR_PATH' not found."
+    exit 1
+fi
+
+echo "Disk usage for directories in $DIR_PATH:"
+du -h -d 1 "$DIR_PATH" | sort -h
