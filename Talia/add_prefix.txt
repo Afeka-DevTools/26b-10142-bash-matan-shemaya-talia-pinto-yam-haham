@@ -1,0 +1,19 @@
+# פקודה: הוספת תחילית לשם הקובץ של כל קבצי הtxt בתיקיה מסוימת
+#!/bin/bash
+
+TARGET_DIR="/path/to/directory"
+PREFIX="new_"
+
+echo "מוסיף תחילית '$PREFIX' לקבצי txt בתיקייה $TARGET_DIR..."
+
+for file in "$TARGET_DIR"/*.txt; do
+    if [ -f "$file" ]; then
+        DIR_NAME=$(dirname "$file")
+        BASE_NAME=$(basename "$file")
+        
+        mv "$file" "$DIR_NAME/${PREFIX}${BASE_NAME}"
+        echo "שונה השם של: $BASE_NAME -> ${PREFIX}${BASE_NAME}"
+    fi
+done
+
+echo "הפעולה הסתיימה."

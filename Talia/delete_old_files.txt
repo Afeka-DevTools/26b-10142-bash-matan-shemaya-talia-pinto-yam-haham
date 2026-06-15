@@ -1,0 +1,11 @@
+# פקודה: מחיקת קבצים הישנים יותר מ-X ימים, מתיקיה מסוימת
+#!/bin/bash
+
+TARGET_DIR="/path/to/directory"
+DAYS_OLD=30 
+
+echo "מחפש ומוחק קבצים שגילם מעל $DAYS_OLD ימים בתיקייה $TARGET_DIR..."
+
+find "$TARGET_DIR" -type f -mtime +$DAYS_OLD -exec rm -v {} \;
+
+echo "פעולת המחיקה הסתיימה."

@@ -1,0 +1,13 @@
+# פקודה: בדיקת חיבוריות לרשת האינטרנט והדפסת log למסך
+#!/bin/bash
+
+TARGET="8.8.8.8"
+TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+
+echo "בודק חיבוריות לרשת..."
+
+if ping -c 1 "$TARGET" &> /dev/null; then
+    echo "[$TIMESTAMP] LOG: חיבור לאינטרנט תקין."
+else
+    echo "[$TIMESTAMP] LOG: שגיאה - אין חיבור לאינטרנט."
+fi
